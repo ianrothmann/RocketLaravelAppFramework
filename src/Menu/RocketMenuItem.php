@@ -11,7 +11,7 @@ namespace IanRothmann\RocketLaravelAppFramework;
 
 class RocketMenuItem
 {
-    public $itemLabel, $itemHint, $itemLink, $itemIcon, $itemId;
+    public $itemLabel, $itemHint, $itemLink, $itemIcon, $itemId, $itemTarget;
     public $subMenu;
 
     public function __construct($label){
@@ -31,6 +31,11 @@ class RocketMenuItem
 
     public function link($value){
         $this->itemLink=$value;
+        return $this;
+    }
+
+    public function target($value){
+        $this->itemTarget=$value;
         return $this;
     }
 
