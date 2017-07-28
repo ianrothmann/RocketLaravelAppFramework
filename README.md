@@ -18,10 +18,10 @@ Facades
 'Rocket' =>IanRothmann\RocketLaravelAppFramework\Facades\Rocket::class
 ```
 
-##Menus
+## Menus
 Menus can be specified in middleware, but can also be modified in any controller before passing the view.
 
-###Usage
+### Usage
 You can give the menu a name, for instance "main", and then chain the items. The icon is optional. If you need a custom item, you can use `->custom`
 
 ```php
@@ -42,14 +42,14 @@ Groups are also possible. Specify `->group`. This returns the item. Then specify
             
  Rocket::menu('main')->route('Home','home',[]);
 ```
-###Prepending
+### Prepending
 Sometimes one would like to prepend items (especially when modifying middleware defined menus from the controller. All item functions can start with `push` to prepend.
 
 ```php
    Rocket::menu('main')->pushRoute('Home','home',[]); //pushLink, pushGroup, pushCustom etc.
 ```
 
-###Front-end
+### Front-end
 
 This package integrates with VueBridge and makes the menu available in `$store.state.server.rocketMenus`, for use with `rocket-framework-menu` in `RocketVueAppFramework`:
 
