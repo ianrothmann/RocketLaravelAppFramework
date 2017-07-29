@@ -1,7 +1,6 @@
 {
     "name": "ianrothmann/rocket-laravel-framework",
     "description": "RocketFramework Laravel Helpers",
-    "version": "0.0.1",
 	"type": "library",
     "license": "Apache2",
     "authors": [
