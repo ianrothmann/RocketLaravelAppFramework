@@ -63,3 +63,10 @@ This package integrates with VueBridge and makes the menu available in `$store.s
 <rocket-framework-menu :menu="$store.state.server.rocketMenus&&$store.state.server.rocketMenus.main"></rocket-framework-menu>
 ```
 
+## Edit in place language
+This enables you to use blade syntax `@editabletext(language_line_code)` or `@editablehtml(language_line_code)`. If edit mode is active, a user will be able to edit the text in place. This is useful for public facing websites etc.
+
+* Use `Rocket::activateLanguageEdit()` or `Rocket::deactivateLanguageEdit()` to enter edit mode.
+* There are language configurations in app/config/rocketframework.php - mostly for the update routing. The defaults should do in most cases. - but remember the middleware for route protection. The default is [], but is should have auth and rights.
+* It used the spatie/laravel-translation-loader package to store it in a `language_lines` table, make sure the table exists - for more info look at their readme.
+
