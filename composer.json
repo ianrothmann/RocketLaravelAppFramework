@@ -12,6 +12,7 @@
     "require": {
 		"php": ">=5.4.0",
         "laravel/framework": ">=5.4.0",
+        "spatie/laravel-translation-loader": "^2.0",
         "ianrothmann/laravel-vue-bridge": "*"
 	},
 	"autoload": {

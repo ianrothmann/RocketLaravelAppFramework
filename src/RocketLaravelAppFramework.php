@@ -9,6 +9,7 @@
 namespace IanRothmann\RocketLaravelAppFramework;
 
 
+use IanRothmann\RocketLaravelAppFramework\Language\RocketLanguage;
 use VueBridge;
 
 class RocketLaravelAppFramework
@@ -16,12 +17,14 @@ class RocketLaravelAppFramework
     /** @var RocketMenu[] $menus
      */
     public $menus=[];
+    public $language;
 
     public function __construct(){
         $self=$this;
         VueBridge::exposeClosureResult('rocketMenus',function() use ($self){
            return $self->getMenus();
         });
+        $this->language=new RocketLanguage();
     }
 
     public function menu($id){
@@ -33,5 +36,17 @@ class RocketLaravelAppFramework
 
     public function getMenus(){
         return $this->menus;
+    }
+
+    public function activateLanguageEdit(){
+        $this->language->activateEditMode();
+    }
+
+    public function deactivateLanguageEdit(){
+        $this->language->deactivateEditMode();
+    }
+
+    public function isInLanguageEditMode(){
+        return $this->language->isInEditMode();
     }
 }
