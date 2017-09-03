@@ -18,6 +18,12 @@ Facades
 'Rocket' =>IanRothmann\RocketLaravelAppFramework\Facades\Rocket::class
 ```
 
+Publish the config
+
+```php
+php artisan vendor:publish --provider="IanRothmann\RocketLaravelAppFramework\ServiceProviders\RocketAppServiceProvider"  --tag="config"
+```
+
 ## Menus
 Menus can be specified in middleware, but can also be modified in any controller before passing the view.
 
