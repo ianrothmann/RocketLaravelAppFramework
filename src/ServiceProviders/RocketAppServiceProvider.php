@@ -39,7 +39,7 @@ class RocketAppServiceProvider extends ServiceProvider
     {
         if (file_exists( __DIR__.DIRECTORY_SEPARATOR.'../helpers.php'))
         {
-            require __DIR__.DIRECTORY_SEPARATOR.'../helpers.php';
+            require_once __DIR__.DIRECTORY_SEPARATOR.'../helpers.php';
         }
     }
 
