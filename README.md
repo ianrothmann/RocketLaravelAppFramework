@@ -32,10 +32,10 @@ You can give the menu a name, for instance "main", and then chain the items. The
 
 ```php
 Rocket::menu('main')
-        ->route(label,routeName,paramsArray,icon)
-        ->route('Change Password','password.change')
-        ->link(name,url,icon) 
-        ->custom(RocketMenu::item("Google")->link("http://google.com")->hint('Go to Google')->icon('delete')->id('google')->target('_blank'));
+        ->route(label,routeName,paramsArray,icon,userRightOrClosureReturningBool)
+        ->route('Change Password','password.change',[],'person','user_edit')
+        ->link(name,url,icon,userRightOrClosureReturningBool) 
+        ->custom(RocketMenu::item("Google")->link("http://google.com")->hint('Go to Google')->icon('delete')->id('google')->target('_blank')->right(userRightOrClosureReturningBool));
 ```
 
 Groups are also possible. Specify `->group`. This returns the item. Then specify `->subMenu()`, and now you can chain the items to the submenu. You need to start with `Rocket::menu('main')` again to add main menu items.
