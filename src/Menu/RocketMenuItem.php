@@ -11,8 +11,9 @@ namespace IanRothmann\RocketLaravelAppFramework;
 
 class RocketMenuItem
 {
-    public $itemLabel, $itemHint, $itemLink, $itemIcon, $itemId, $itemTarget;
+    public $itemLabel, $itemHint, $itemLink, $itemIcon, $itemId, $itemTarget, $itemRight;
     public $subMenu;
+
 
     public function __construct($label){
         $this->label($label);
@@ -46,6 +47,11 @@ class RocketMenuItem
 
     public function icon($value){
         $this->itemIcon=$value;
+        return $this;
+    }
+
+    public function right($rightOrClosure){
+        $this->itemRight=$rightOrClosure;
         return $this;
     }
 
@@ -101,6 +107,15 @@ class RocketMenuItem
     {
         return $this->subMenu;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getItemRight()
+    {
+        return $this->itemRight;
+    }
+
 
 
 

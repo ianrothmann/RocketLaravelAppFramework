@@ -9,6 +9,9 @@
 namespace IanRothmann\RocketLaravelAppFramework;
 
 
+use App\User;
+use Illuminate\Support\Facades\Auth;
+
 class RocketMenu
 {
 
@@ -29,34 +32,54 @@ class RocketMenu
         return $this->menuName.'_'.$id;
     }
 
-    public function route($label,$routeName,$params=[],$icon=null){
-        $this->items[$this->makeId($this->idcnt)]=RocketMenu::item($label)
-            ->route($routeName,$params)
-            ->icon($icon)
-            ->id($this->idcnt);
-        $this->idcnt++;
+    private function hasRight($rightOrClosure){
+        if($rightOrClosure===null)
+            return true;
+        elseif(is_callable($rightOrClosure))
+            return $rightOrClosure();
+        elseif(Auth::user()){
+            return Auth::user()->hasRight($rightOrClosure);
+        }else{
+            return false;
+        }
+
+    }
+
+    public function route($label,$routeName,$params=[],$icon=null,$rightOrClosure=null){
+        if($this->hasRight($rightOrClosure)){
+            $this->items[$this->makeId($this->idcnt)]=RocketMenu::item($label)
+                ->route($routeName,$params)
+                ->icon($icon)
+                ->id($this->idcnt)
+                ->right($rightOrClosure);
+            $this->idcnt++;
+        }
         return $this;
     }
 
 
-    public function link($label,$link,$icon=null){
-        $this->items[$this->makeId($this->idcnt)]=RocketMenu::item($label)
-                        ->link($link)
-                        ->icon($icon)
-                        ->id($this->idcnt);
-        $this->idcnt++;
-
+    public function link($label,$link,$icon=null,$rightOrClosure=null){
+        if($this->hasRight($rightOrClosure)){
+            $this->items[$this->makeId($this->idcnt)]=RocketMenu::item($label)
+                ->link($link)
+                ->icon($icon)
+                ->id($this->idcnt)
+                ->right($rightOrClosure);
+            $this->idcnt++;
+        }
         return $this;
     }
 
 
     public function custom(RocketMenuItem $rocketMenuItem){
-        if($rocketMenuItem->getItemId()===null)
-            $rocketMenuItem->id($this->idcnt);
+        if($this->hasRight($rocketMenuItem->getItemRight())){
+            if($rocketMenuItem->getItemId()===null)
+                $rocketMenuItem->id($this->idcnt);
 
-        $this->items[$this->makeId($rocketMenuItem->getItemId())]=$rocketMenuItem;
+            $this->items[$this->makeId($rocketMenuItem->getItemId())]=$rocketMenuItem;
 
-        $this->idcnt++;
+            $this->idcnt++;
+        }
 
         return $this;
     }
@@ -75,39 +98,50 @@ class RocketMenu
         return $this->items[$oldid];
     }
 
-    public function pushRoute($label,$routeName,$params=[],$icon=null){
-        $temp=[];
-        $temp[$this->makeId($this->idcnt)]=RocketMenu::item($label)
-            ->route($routeName,$params)
-            ->icon($icon)
-            ->id($this->idcnt);
-        $this->idcnt++;
-        $this->items=$temp+$this->items;
+    public function pushRoute($label,$routeName,$params=[],$icon=null,$rightOrClosure=null){
+        if($this->hasRight($rightOrClosure)){
+            $temp=[];
+            $temp[$this->makeId($this->idcnt)]=RocketMenu::item($label)
+                ->route($routeName,$params)
+                ->icon($icon)
+                ->id($this->idcnt)
+                ->right($rightOrClosure);
+            $this->idcnt++;
+            $this->items=$temp+$this->items;
+        }
+
         return $this;
     }
 
 
-    public function pushLink($label,$link,$icon=null){
-        $temp=[];
-        $temp[$this->makeId($this->idcnt)]=RocketMenu::item($label)
-            ->link($link)
-            ->icon($icon)
-            ->id($this->idcnt);
-        $this->idcnt++;
-        $this->items=$temp+$this->items;
+    public function pushLink($label,$link,$icon=null,$rightOrClosure=null){
+        if($this->hasRight($rightOrClosure)){
+            $temp=[];
+            $temp[$this->makeId($this->idcnt)]=RocketMenu::item($label)
+                ->link($link)
+                ->icon($icon)
+                ->id($this->idcnt)
+                ->right($rightOrClosure);
+            $this->idcnt++;
+            $this->items=$temp+$this->items;
+        }
+
         return $this;
     }
 
 
     public function pushCustom(RocketMenuItem $rocketMenuItem){
-        if($rocketMenuItem->getItemId()===null)
-            $rocketMenuItem->id($this->idcnt);
+        if($this->hasRight($rocketMenuItem->getItemRight())){
+            if($rocketMenuItem->getItemId()===null)
+                $rocketMenuItem->id($this->idcnt);
 
-        $temp=[];
-        $temp[$this->makeId($rocketMenuItem->getItemId())]=$rocketMenuItem;
+            $temp=[];
+            $temp[$this->makeId($rocketMenuItem->getItemId())]=$rocketMenuItem;
 
-        $this->idcnt++;
-        $this->items=$temp+$this->items;
+            $this->idcnt++;
+            $this->items=$temp+$this->items;
+        }
+
         return $this;
     }
 
@@ -134,5 +168,7 @@ class RocketMenu
     public static function item($label){
         return new RocketMenuItem($label);
     }
+
+    //public function prepare
 
 }

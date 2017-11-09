@@ -35,6 +35,9 @@ class RocketLaravelAppFramework
     }
 
     public function getMenus(){
+        foreach($this->menus as &$menu){
+            //$menu->c
+        }
         return $this->menus;
     }
 
