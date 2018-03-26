@@ -2,7 +2,7 @@
     "name": "ianrothmann/rocket-laravel-framework",
     "description": "RocketFramework Laravel Helpers",
 	"type": "library",
-    "license": "Apache2",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Ian Rothmann",

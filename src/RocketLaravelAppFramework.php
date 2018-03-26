@@ -9,6 +9,7 @@
 namespace IanRothmann\RocketLaravelAppFramework;
 
 
+use IanRothmann\RocketLaravelAppFramework\Breadcrumbs\BreadcrumbsService;
 use IanRothmann\RocketLaravelAppFramework\Language\RocketLanguage;
 use VueBridge;
 
@@ -18,6 +19,7 @@ class RocketLaravelAppFramework
      */
     public $menus=[];
     public $language;
+    public $breadcrumbsService;
 
     public function __construct(){
         $self=$this;
@@ -25,6 +27,7 @@ class RocketLaravelAppFramework
            return $self->getMenus();
         });
         $this->language=new RocketLanguage();
+        $this->breadcrumbsService=new BreadcrumbsService();
     }
 
     public function menu($id){
@@ -39,6 +42,13 @@ class RocketLaravelAppFramework
             //$menu->c
         }
         return $this->menus;
+    }
+
+    /**
+     * @return BreadcrumbsService
+     */
+    public function breadcrumbs(){
+        return $this->breadcrumbsService;
     }
 
     public function activateLanguageEdit(){

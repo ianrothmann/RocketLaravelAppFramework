@@ -22,6 +22,8 @@ class RocketAppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../Config/rocketframework.php' => config_path('rocketframework.php'),
         ],'config');
+
+        $this->loadViewsFrom(__DIR__.'/../Views/', 'rocket');
     }
 
     public function register(){
