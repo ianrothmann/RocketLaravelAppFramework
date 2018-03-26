@@ -63,6 +63,32 @@ This package integrates with VueBridge and makes the menu available in `$store.s
 <rocket-framework-menu :menu="$store.state.server.rocketMenus&&$store.state.server.rocketMenus.main"></rocket-framework-menu>
 ```
 
+### Breadcrumbs
+
+Use `Rocket::breadcrumbs()`, to access the BreadcrumbsService:
+
+You may either use:
+```php
+@include('rocket::breadcrumbsmenu')
+```
+to show a menu icon with the items in a menu
+
+or
+```php
+@include('rocket::breadcrumbs')
+```
+To display a classic breadcrumbs bar. Everything is only implemented in Vuetify. You cannot use both, be sure to only use one of them on a page.
+
+in `config/rocketframework.php`, you may set
+```php
+'breadcrumbs' => [
+        'number'=>4, //Number of breadcrumbs to save
+        'default'=>'show' //Default behaviour to show or hide breadcrumbs
+    ]
+```
+
+On any page you may call: `Rocket::breadcrumbs()->show()` or `Rocket::breadcrumbs()->hide()` to bread away from the default behaviour. You can also set a namespace for the breadcrumbs to limit them on certain parts/sessions on the system. For instance: `Rocket::breadcrumbs()->setBreadcrumbsNamespace($clientid)`
+
 ## Edit in place language
 This enables you to use blade syntax `@editabletext(language_line_code)` or `@editablehtml(language_line_code)`. If edit mode is active, a user will be able to edit the text in place. This is useful for public facing websites etc.
 
