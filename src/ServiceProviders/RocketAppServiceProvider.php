@@ -18,6 +18,7 @@ class RocketAppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        RocketLanguage::register();
         $this->loadRoutesFrom(__DIR__.'/../Routes/routes.php');
         $this->publishes([
             __DIR__.'/../Config/rocketframework.php' => config_path('rocketframework.php'),
@@ -29,8 +30,6 @@ class RocketAppServiceProvider extends ServiceProvider
     public function register(){
         $this->app->bind('rocket-app','IanRothmann\RocketLaravelAppFramework\RocketLaravelAppFramework');
         $this->registerHelpers();
-        RocketLanguage::register();
-
     }
 
 
