@@ -11,6 +11,7 @@ namespace IanRothmann\RocketLaravelAppFramework;
 
 use IanRothmann\RocketLaravelAppFramework\Breadcrumbs\BreadcrumbsService;
 use IanRothmann\RocketLaravelAppFramework\Language\RocketLanguage;
+use IanRothmann\RocketLaravelAppFramework\Menu\RocketMenu;
 use VueBridge;
 
 class RocketLaravelAppFramework

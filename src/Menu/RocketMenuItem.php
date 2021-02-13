@@ -6,7 +6,7 @@
  * Time: 11:16 AM
  */
 
-namespace IanRothmann\RocketLaravelAppFramework;
+namespace IanRothmann\RocketLaravelAppFramework\Menu;
 
 
 class RocketMenuItem

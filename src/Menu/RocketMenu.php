@@ -6,7 +6,7 @@
  * Time: 9:59 AM
  */
 
-namespace IanRothmann\RocketLaravelAppFramework;
+namespace IanRothmann\RocketLaravelAppFramework\Menu;
 
 
 use App\User;
